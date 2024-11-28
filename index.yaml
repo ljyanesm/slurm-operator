@@ -1,0 +1,37 @@
+apiVersion: v1
+entries:
+  slurm:
+  - annotations:
+      category: HPC
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: "24.05"
+    created: "2024-11-28T21:57:13.847713671Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~16.3
+    - condition: exporter.enabled
+      name: slurm-exporter
+      repository: oci://ghcr.io/slinkyproject/charts
+      version: ~0.1.0
+    description: Helm Chart for Slurm HPC Workload Manager
+    digest: 0bb7c794669c54a0e8a237d08c1a23280f90920403fe3e407857603767ace767
+    name: slurm
+    type: application
+    urls:
+    - https://github.com/ljyanesm/slurm-operator/releases/download/slurm-0.1.0/slurm-0.1.0.tgz
+    version: 0.1.0
+  slurm-operator:
+  - apiVersion: v2
+    appVersion: "24.05"
+    created: "2024-11-28T21:57:14.039161683Z"
+    description: Helm Chart for Slurm HPC Workload Manager Operator
+    digest: 51935512168bee6f359ff03ddcd6a0208d8616cebb382b28f210f0779dd7bd70
+    name: slurm-operator
+    type: application
+    urls:
+    - https://github.com/ljyanesm/slurm-operator/releases/download/slurm-operator-0.1.0/slurm-operator-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-11-28T21:57:14.039185897Z"
