@@ -4,9 +4,9 @@ SPDX-License-Identifier: Apache-2.0
 */}}
 
 {{- if .Values.controller.enabled }}
-{{- if gt .Values.controller.replicas 1.0 }}
-  {{- fail "Key `controller.replicas` does not support values greater than 1." -}}
-{{- end }}{{- /* if gt .Values.controller.replicas 1.0 */}}
+{{- if gt .Values.controller.replicas 3.0 }}
+  {{- fail "Key `controller.replicas` does not support values greater than 3." -}}
+{{- end }}{{- /* if gt .Values.controller.replicas 3.0 */}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
