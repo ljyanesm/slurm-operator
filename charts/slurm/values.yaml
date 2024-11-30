@@ -167,6 +167,10 @@ controller:
   # Enables the controller node.
   enabled: true
   #
+  # -- (string)
+  # Set the log verbosity for the controller
+  log_level: info
+  #
   # -- (integer)
   # Set the number of replicas to deploy.
   replicas: 1
