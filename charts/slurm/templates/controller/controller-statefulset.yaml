@@ -35,6 +35,8 @@ spec:
     spec:
       priorityClassName: {{ .Values.controller.priorityClassName | default .Values.priorityClassName }}
       automountServiceAccountToken: false
+      dnsConfig:
+        {{- include "slurm.dnsConfig" $ | nindent 8 }}
       {{- if .Values.controller.affinity }}
       affinity:
         {{- .Values.controller.affinity | toYaml | nindent 8 }}
