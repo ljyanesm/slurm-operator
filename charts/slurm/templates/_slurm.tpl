@@ -98,7 +98,7 @@ Define controller state save name
 {{- end }}
 
 {{/*
-Define controller verbosity level
+Define controller log verbosity level
 */}}
 {{- define "slurm.controller.log_level" -}}
 {{- .Values.controller.log_level | default (print "info") -}}
