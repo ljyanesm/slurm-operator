@@ -50,4 +50,5 @@ jobs:
           helm repo update
           helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set crds.enabled=true
           helm install prometheus prometheus-community/kube-prometheus-stack --namespace prometheus --create-namespace --set installCRDs=true
-          ct install --charts=charts/slurm-operator,charts/slurm
+          helm install slurm-operator charts/slurm-operator --namespace slinky --create-namespace
+          ct install --charts=charts/slurm
