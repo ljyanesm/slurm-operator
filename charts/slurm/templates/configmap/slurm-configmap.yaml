@@ -46,7 +46,7 @@ data:
     #
     ### LOGGING ###
     LogTimeFormat=iso8601_ms
-    SlurmctldDebug=info
+    SlurmctldDebug={{- include "slurm.controller.log_level" . }}
     SlurmctldLogFile=/proc/1/fd/1
     SlurmdDebug=info
     SlurmdLogFile=/proc/1/fd/1

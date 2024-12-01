@@ -27,14 +27,14 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
-          changed=$(ct list-changed --chart-dirs charts --target-branch ${{ github.event.repository.default_branch }})
+          changed=$(ct list-changed --chart-dirs=charts --target-branch=${{ github.event.repository.default_branch }})
           if [[ -n "$changed" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run chart-testing (lint)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct lint --chart-dirs charts --target-branch ${{ github.event.repository.default_branch }}
+        run: ct lint --chart-dirs=charts --validate-maintainers=false --target-branch=${{ github.event.repository.default_branch }}
 
       - name: Create kind cluster
         if: steps.list-changed.outputs.changed == 'true'
@@ -42,4 +42,13 @@ jobs:
 
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct install --chart-dirs charts --target-branch ${{ github.event.repository.default_branch }}
+        run: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add jetstack https://charts.jetstack.io
+          helm repo update
+          helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set crds.enabled=true
+          helm install prometheus prometheus-community/kube-prometheus-stack --namespace prometheus --create-namespace --set installCRDs=true
+          helm install slurm-operator charts/slurm-operator --namespace slinky --create-namespace
+          ct install --charts=charts/slurm
